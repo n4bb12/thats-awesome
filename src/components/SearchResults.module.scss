@@ -2,12 +2,22 @@ $grid-gap: 1rem;
 
 .columns {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(var(--column-count), 1fr);
   column-gap: $grid-gap;
 }
 
 .columns,
+.imgContainer {
+  width: 100%;
+  margin: $grid-gap 0;
+}
+
+.imgContainer {
+  position: relative;
+}
+
 .img {
   width: 100%;
-  margin: ($grid-gap / 2) 0;
+  height: auto;
+  display: block;
 }

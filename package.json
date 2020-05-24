@@ -10,6 +10,7 @@
   "dependencies": {
     "@giphy/js-fetch-api": "^1.5.9",
     "@giphy/react-components": "^1.0.7",
+    "modern-normalize": "^0.6.0",
     "next": "9.4.2",
     "react": "16.13.1",
     "react-dom": "16.13.1",
