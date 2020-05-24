@@ -1,29 +1,36 @@
-import { IGif } from "@giphy/js-types"
-import { Grid } from "@giphy/react-components"
-import { FC, SyntheticEvent, useCallback } from "react"
+import { GifsResult } from "@giphy/js-fetch-api"
+import { FC } from "react"
 
-import { gf } from "../constants"
+import styles from "./SearchResults.module.scss"
+
+const columns = [0, 1, 2, 3]
 
 export type SearchResultsProps = {
-  input: string
-  onGifClick?: (gif: IGif, e: SyntheticEvent<HTMLElement, Event>) => void
+  gifs: GifsResult
 }
 
-export const SearchResults: FC<SearchResultsProps> = ({
-  input,
-  onGifClick,
-}) => {
-  const fetchGifs = useCallback(
-    (offset: number) => gf.search(input, { offset, limit: 10 }),
-    [input],
-  )
+export const SearchResults: FC<SearchResultsProps> = ({ gifs }) => {
+  const images = gifs?.data?.map(result => result.images.fixed_width) || []
+
   return (
-    <Grid
-      onGifClick={onGifClick}
-      fetchGifs={fetchGifs}
-      width={800}
-      columns={3}
-      gutter={6}
-    />
+    <div>
+      <div className={styles.columns}>
+        {columns.map(column => (
+          <div key={column}>
+            {images
+              .filter((img, i) => i % columns.length === column)
+              .map(img => (
+                <img
+                  key={img.url}
+                  className={styles.img}
+                  src={img.url}
+                  width={img.width}
+                  height={img.height}
+                />
+              ))}
+          </div>
+        ))}
+      </div>
+    </div>
   )
 }

@@ -1,0 +1,13 @@
+$grid-gap: 1rem;
+
+.columns {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  column-gap: $grid-gap;
+}
+
+.columns,
+.img {
+  width: 100%;
+  margin: ($grid-gap / 2) 0;
+}

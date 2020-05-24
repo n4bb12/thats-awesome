@@ -1,25 +1,87 @@
-import { NextPage } from "next"
+import { GifsResult } from "@giphy/js-fetch-api"
+import { GetServerSideProps, NextPage } from "next"
 import Head from "next/head"
-import { useState } from "react"
+import { useState, useCallback, useEffect } from "react"
 
-import "./index.module.scss"
-import { SearchBar, SearchResults } from "../components"
+import { Background, SearchBar, SearchResults } from "../components"
+import { config } from "../config"
+import { giphyApiClient } from "../giphy"
+import styles from "./index.module.scss"
 
-const Home: NextPage = () => {
-  const [input, setInput] = useState("")
+const gf = giphyApiClient()
+
+type HomeProps = {
+  initialInput: string
+  initialSearchResults: GifsResult
+}
+
+const Home: NextPage<HomeProps> = ({ initialInput, initialSearchResults }) => {
+  const [input, setInput] = useState(initialInput)
+  const [searchResults, setSearchResults] = useState<GifsResult>(
+    initialSearchResults,
+  )
+
+  const search = useCallback(async (input: string) => {
+    window.history.pushState(null, null, window.location.origin + "?q=" + input)
+    const result = await gf.search(input, {
+      offset: 0,
+      limit: 25,
+      type: "gifs",
+      rating: "g",
+    })
+    setSearchResults(result)
+  }, [])
+
+  let searchTimeout: any
+  const searchDebounced = useCallback(
+    (input: string) => {
+      clearTimeout(searchTimeout)
+      searchTimeout = setTimeout(
+        () => search(input),
+        config.searchDebounceTimeMs,
+      )
+    },
+    [search, searchTimeout],
+  )
+
+  useEffect(() => searchDebounced(input), [input])
 
   return (
-    <div className="container">
-      <Head>
-        <title>That's awesome!</title>
-        <link rel="icon" href="/favicon.png" />
-      </Head>
-      <h1>That's awesome!</h1>
+    <>
+      <Background />
+      <div className="container">
+        <Head>
+          <title>{config.title}</title>
+          <link rel="icon" href="/favicon.png" />
+        </Head>
 
-      <SearchBar input={input} onInputChange={setInput} />
-      <SearchResults input={input} />
-    </div>
+        <div className={styles.container}>
+          <h1>{config.title}</h1>
+
+          <SearchBar input={input} onInputChange={setInput} />
+          <SearchResults gifs={searchResults} />
+        </div>
+      </div>
+    </>
   )
 }
 
 export default Home
+
+export const getServerSideProps: GetServerSideProps = async context => {
+  const initialInput = (context.query.q as string) || config.title
+
+  const initialSearchResults = await gf.search(initialInput, {
+    offset: 0,
+    limit: 25,
+    type: "gifs",
+    rating: "g",
+  })
+
+  return {
+    props: {
+      initialInput,
+      initialSearchResults,
+    },
+  }
+}

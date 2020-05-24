@@ -1,0 +1,26 @@
+@import url("https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@400;700&display=swap");
+
+body {
+  max-width: 100%;
+  overflow-x: hidden;
+  font-family: "Josefin Sans", sans-serif;
+  margin: 0;
+  min-height: 100vh;
+  color: white;
+}
+
+#__next {
+  min-height: 100vh;
+}
+
+pre {
+  max-width: 100%;
+  overflow-x: auto;
+  background: #444;
+}
+
+input {
+  font-family: inherit;
+  font-weight: inherit;
+  font-size: inherit;
+}
