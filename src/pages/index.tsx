@@ -69,7 +69,7 @@ const Home: NextPage<HomeProps> = ({ initialInput, initialSearchResults }) => {
 export default Home
 
 export const getServerSideProps: GetServerSideProps = async context => {
-  const initialInput = (context.query.q as string) || config.title
+  const initialInput = (context.query.q as string) || config.defaultSearch
 
   const initialSearchResults = await gf.search(initialInput, {
     offset: 0,
