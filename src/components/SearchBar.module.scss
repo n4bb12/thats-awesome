@@ -4,12 +4,9 @@
   width: 100%;
   margin: 1.5rem 0;
   outline: none;
-  border: 0.25rem solid transparent;
-  transition: 0.1s ease-out border-color;
+  border: 0.5rem solid transparent;
 
   &:focus {
-    border-color: #56a4fc;
-    border-color: #591236;
     border-color: #DC1383;
   }
 

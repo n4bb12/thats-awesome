@@ -24,3 +24,8 @@ input {
   font-weight: inherit;
   font-size: inherit;
 }
+
+::selection {
+  background: #02b7ff;
+  color: white;
+}
