@@ -20,6 +20,7 @@ const Home: NextPage<HomeProps> = (props) => {
       <Head>
         <title>{config.title}</title>
         <link rel="icon" href="/favicon.png" />
+        <link rel="preconnect" href="https://images.unsplash.com" />
         <link
           rel="preload"
           href="https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@400;700&display=swap"
