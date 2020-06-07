@@ -68,10 +68,10 @@ export const Search: NextPage<SearchProps> = ({
 
       <SearchBar
         input={input}
-        onInputChange={() => {
-          setInput(input)
-          updateUrl(input)
-          searchDebounced(input, 0)
+        onInputChange={(newInput) => {
+          setInput(newInput)
+          updateUrl(newInput)
+          searchDebounced(newInput, 0)
         }}
       />
       <SearchResults columns={columnManager.columns} />
