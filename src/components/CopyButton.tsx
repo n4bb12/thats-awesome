@@ -1,18 +1,9 @@
-import { FC, useState, useCallback, useEffect } from "react"
+import copyToClipboard from "copy-to-clipboard"
+import { FC, useCallback, useEffect, useState } from "react"
 
 import styles from "./CopyButton.module.scss"
 
 const copyEvent = "app-copy"
-
-function copyToClipboard(url: string) {
-  const markdown = `![](${url})`
-  const el = document.createElement("textarea")
-  el.value = markdown
-  document.body.appendChild(el)
-  el.select()
-  document.execCommand("copy")
-  document.body.removeChild(el)
-}
 
 function emitCopy(url: string) {
   const event = new CustomEvent(copyEvent, { detail: url })
@@ -52,7 +43,7 @@ export const CopyButton: FC<CopyButtonProps> = ({ url }) => {
     .join(" ")
 
   const onClick = useCallback(() => {
-    copyToClipboard(url)
+    copyToClipboard(`![](${url})`)
     emitCopy(url)
   }, [url])
 
