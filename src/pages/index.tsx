@@ -55,7 +55,7 @@ export const getServerSideProps: GetServerSideProps<HomeProps> = async (
 
   return {
     props: {
-      initialInput,
+      initialInput: searchTerm,
       initialGifs: initialSearchResults.data,
     },
   }

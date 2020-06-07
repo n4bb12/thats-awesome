@@ -57,10 +57,8 @@ export const Search: NextPage<SearchProps> = ({
   )
 
   useEffect(() => {
-    if (input !== initialInput) {
-      updateUrl(input)
-      searchDebounced(input, 0)
-    }
+    updateUrl(input)
+    searchDebounced(input, 0)
   }, [input])
 
   useEffect(() => {
