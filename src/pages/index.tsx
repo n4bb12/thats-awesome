@@ -15,6 +15,11 @@ type HomeProps = {
 }
 
 const Home: NextPage<HomeProps> = (props) => {
+  if (process.browser && "scrollRestoration" in window.history) {
+    // Back off, browser, I got this...
+    window.history.scrollRestoration = "manual"
+  }
+
   return (
     <>
       <Head>
