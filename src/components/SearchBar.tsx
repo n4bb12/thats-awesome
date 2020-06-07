@@ -14,6 +14,11 @@ export const SearchBar: FC<SearchBarProps> = ({ input, onInputChange }) => {
       type="search"
       value={input}
       onChange={e => onInputChange(e.target.value)}
+      spellCheck={false}
+      autoCapitalize="false"
+      autoComplete="false"
+      autoCorrect="false"
+      autoFocus
     />
   )
 }
