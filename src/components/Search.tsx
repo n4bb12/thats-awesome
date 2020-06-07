@@ -29,23 +29,27 @@ export const Search: NextPage<SearchProps> = ({
   const [columnManager] = useState(new ColumnManager(initialGifs))
 
   const search = useCallback(
-    async (userInput: string, searchOffset: number) => {
+    async (userInput: string, scrolledPage: number) => {
       setBusy(true)
 
       const searchTerm = userInput?.trim() || randomWord()
+      const page = userInput.trim()
+        ? scrolledPage
+        : Math.floor(Math.random() * 5)
+
       const result = await gf.search(searchTerm, {
-        offset: searchOffset * config.chunkSize,
+        offset: page * config.chunkSize,
         limit: config.chunkSize,
         type: "gifs",
         rating: "g",
       })
 
-      if (searchOffset) {
+      if (scrolledPage) {
         columnManager.addResults(result.data)
       } else {
         columnManager.setResults(result.data)
       }
-      setPage(searchOffset)
+      setPage(scrolledPage)
       setTimeout(() => setBusy(false))
     },
     [],
