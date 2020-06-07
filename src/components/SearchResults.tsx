@@ -1,4 +1,4 @@
-import { GifsResult } from "@giphy/js-fetch-api"
+import { IGif } from "@giphy/js-types"
 import { FC, useState } from "react"
 
 import { CopyButton } from "./CopyButton"
@@ -7,15 +7,17 @@ import styles from "./SearchResults.module.scss"
 const columns = [0, 1, 2, 3, 4, 5]
 
 export type SearchResultsProps = {
-  gifs: GifsResult
+  gifs: IGif[]
 }
 
 export const SearchResults: FC<SearchResultsProps> = ({ gifs }) => {
   const [numCols, setNumCols] = useState(3)
-  const images = gifs?.data?.map((result) => result.images.fixed_width) || []
+
+  const images = gifs.map((result) => result.images.fixed_width) || []
 
   return (
     <div>
+      {/* configure the color */}
       {/* <input
         type="range"
         min="1"

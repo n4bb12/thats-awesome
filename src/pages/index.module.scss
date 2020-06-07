@@ -1,6 +1,20 @@
 .container {
+  position: relative;
   width: 60rem;
   max-width: 100%;
   margin: 0 auto;
   padding: 5rem 1rem;
+  min-height: 150vh;
+}
+
+.loadingTrigger {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 50vh;
+  height: 1rem;
+  background: red;
+  pointer-events: none;
+  transform: translateY(101%);
+  opacity: 0;
 }

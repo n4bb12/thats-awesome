@@ -1,54 +1,77 @@
-import { GifsResult } from "@giphy/js-fetch-api"
+import { IGif } from "@giphy/js-types"
+import debounce from "lodash/debounce"
 import { GetServerSideProps, NextPage } from "next"
 import Head from "next/head"
-import { useState, useCallback, useEffect } from "react"
+import { useCallback, useEffect, useState } from "react"
+import { useInView } from "react-intersection-observer"
 
 import { Background, SearchBar, SearchResults } from "../components"
 import { config } from "../config"
 import { giphyApiClient } from "../giphy"
+import { randomWord } from "../words"
 import styles from "./index.module.scss"
 
 const gf = giphyApiClient()
+const gifChunkSize = 50
 
 type HomeProps = {
   initialInput: string
-  initialSearchResults: GifsResult
+  initialGifs: IGif[]
 }
 
-const Home: NextPage<HomeProps> = ({ initialInput, initialSearchResults }) => {
+const Home: NextPage<HomeProps> = ({ initialInput, initialGifs }) => {
   const [input, setInput] = useState(initialInput)
-  const [searchResults, setSearchResults] = useState<GifsResult>(
-    initialSearchResults,
-  )
+  const [page, setPage] = useState(0)
+  const [ref, inView] = useInView()
+  const [busy, setBusy] = useState(false)
+  const [gifs, setGifs] = useState(initialGifs)
 
-  const search = useCallback(async (input: string) => {
-    window.history.pushState(null, null, window.location.origin + "?q=" + input)
-    const result = await gf.search(input, {
-      offset: 0,
-      limit: 25,
-      type: "gifs",
-      rating: "g",
-    })
-    setSearchResults(result)
-  }, [])
+  const search = useCallback(
+    async (userInput: string, searchOffset: number) => {
+      setBusy(true)
 
-  let searchTimeout: any
-  const searchDebounced = useCallback(
-    (input: string) => {
-      clearTimeout(searchTimeout)
-      searchTimeout = setTimeout(
-        () => search(input),
-        config.searchDebounceTimeMs,
-      )
+      const searchTerm = userInput?.trim() || randomWord()
+      const result = await gf.search(searchTerm, {
+        offset: searchOffset * gifChunkSize,
+        limit: gifChunkSize,
+        type: "gifs",
+        rating: "g",
+      })
+
+      setPage(searchOffset)
+      setGifs(searchOffset ? [...gifs, ...result.data] : result.data)
+      setTimeout(() => setBusy(false))
     },
-    [search, searchTimeout],
+    [gifs],
   )
 
-  useEffect(() => searchDebounced(input), [input])
+  const searchDebounced = useCallback<typeof search>(
+    debounce(search, config.searchDebounceTimeMs),
+    [search],
+  )
+
+  useEffect(() => {
+    if (input !== initialInput) {
+      window.history.replaceState(
+        null,
+        null,
+        window.location.origin + "?q=" + input,
+      )
+
+      searchDebounced(input, 0)
+    }
+  }, [input])
+
+  useEffect(() => {
+    if (inView && !busy) {
+      search(input, page + 1)
+    }
+  }, [inView])
 
   return (
     <>
       <Background />
+
       <div className="container">
         <Head>
           <title>{config.title}</title>
@@ -59,7 +82,9 @@ const Home: NextPage<HomeProps> = ({ initialInput, initialSearchResults }) => {
           <h1>{config.title}</h1>
 
           <SearchBar input={input} onInputChange={setInput} />
-          <SearchResults gifs={searchResults} />
+          <SearchResults gifs={gifs} />
+
+          <div className={styles.loadingTrigger} ref={ref}></div>
         </div>
       </div>
     </>
@@ -68,10 +93,13 @@ const Home: NextPage<HomeProps> = ({ initialInput, initialSearchResults }) => {
 
 export default Home
 
-export const getServerSideProps: GetServerSideProps = async (context) => {
-  const initialInput = (context.query.q as string) || config.defaultSearch
+export const getServerSideProps: GetServerSideProps<HomeProps> = async (
+  context,
+) => {
+  const initialInput = (context.query.q as string)?.trim() || ""
+  const searchTerm = initialInput || randomWord()
 
-  const initialSearchResults = await gf.search(initialInput, {
+  const initialSearchResults = await gf.search(searchTerm, {
     offset: 0,
     limit: 25,
     type: "gifs",
@@ -81,7 +109,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
   return {
     props: {
       initialInput,
-      initialSearchResults,
+      initialGifs: initialSearchResults.data,
     },
   }
 }
