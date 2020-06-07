@@ -1,52 +1,45 @@
-import { IGif } from "@giphy/js-types"
-import { FC, useState } from "react"
+import { FC } from "react"
 
+import { config } from "../config"
 import { CopyButton } from "./CopyButton"
 import styles from "./SearchResults.module.scss"
 
-const columns = [0, 1, 2, 3, 4, 5]
-
 export type SearchResultsProps = {
-  gifs: IGif[]
+  columns: {
+    gifs: {
+      width: number
+      height: number
+      url: string
+    }[]
+  }[]
 }
 
-export const SearchResults: FC<SearchResultsProps> = ({ gifs }) => {
-  const [numCols, setNumCols] = useState(3)
-
-  const images = gifs.map((result) => result.images.fixed_width) || []
-
+export const SearchResults: FC<SearchResultsProps> = ({ columns }) => {
   return (
-    <div>
-      {/* configure the color */}
-      {/* <input
-        type="range"
-        min="1"
-        max="6"
-        value={numCols}
-        onChange={e => setNumCols(+e.target.value)}
-      /> */}
-      <div
-        className={styles.columns}
-        style={{ ["--column-count"]: numCols } as any}>
-        {columns.slice(0, numCols).map((column) => (
-          <div key={column}>
-            {images
-              .filter((img, i) => i % numCols === column)
-              .map((gif) => (
-                <div
-                  className={styles.imgContainer}
-                  key={gif.url}
-                  style={{
-                    width: "300px",
-                    height: gif.height * (300 / gif.width) + "px",
-                  }}>
-                  <CopyButton url={gif.url} />
-                  <img className={styles.img} src={gif.url} />
-                </div>
-              ))}
-          </div>
-        ))}
-      </div>
+    <div
+      className={styles.columns}
+      style={
+        {
+          ["--column-count"]: config.colums,
+          ["--grid-gap"]: config.gridGap + "px",
+        } as any
+      }>
+      {columns.map((column, c) => (
+        <div key={c}>
+          {column.gifs.map((gif) => (
+            <div
+              key={gif.url}
+              className={styles.imgContainer}
+              style={{
+                width: gif.width + "px",
+                height: gif.height + "px",
+              }}>
+              <CopyButton url={gif.url} />
+              <img className={styles.img} src={gif.url} />
+            </div>
+          ))}
+        </div>
+      ))}
     </div>
   )
 }

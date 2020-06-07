@@ -7,6 +7,7 @@ import { useInView } from "react-intersection-observer"
 import { SearchBar, SearchResults } from "../components"
 import { config } from "../config"
 import { giphyApiClient } from "../giphy"
+import { ColumnManager, updateUrl } from "../utils"
 import { randomWord } from "../words"
 import styles from "./Search.module.scss"
 
@@ -25,7 +26,7 @@ export const Search: NextPage<SearchProps> = ({
   const [page, setPage] = useState(0)
   const [ref, inView] = useInView()
   const [busy, setBusy] = useState(false)
-  const [gifs, setGifs] = useState(initialGifs)
+  const [columnManager] = useState(new ColumnManager(initialGifs))
 
   const search = useCallback(
     async (userInput: string, searchOffset: number) => {
@@ -39,11 +40,15 @@ export const Search: NextPage<SearchProps> = ({
         rating: "g",
       })
 
+      if (searchOffset) {
+        columnManager.addResults(result.data)
+      } else {
+        columnManager.setResults(result.data)
+      }
       setPage(searchOffset)
-      setGifs(searchOffset ? [...gifs, ...result.data] : result.data)
       setTimeout(() => setBusy(false))
     },
-    [gifs],
+    [],
   )
 
   const searchDebounced = useCallback<typeof search>(
@@ -53,12 +58,7 @@ export const Search: NextPage<SearchProps> = ({
 
   useEffect(() => {
     if (input !== initialInput) {
-      window.history.replaceState(
-        null,
-        null,
-        window.location.origin + "?q=" + input,
-      )
-
+      updateUrl(input)
       searchDebounced(input, 0)
     }
   }, [input])
@@ -74,7 +74,7 @@ export const Search: NextPage<SearchProps> = ({
       <h1>{config.title}</h1>
 
       <SearchBar input={input} onInputChange={setInput} />
-      <SearchResults gifs={gifs} />
+      <SearchResults columns={columnManager.columns} />
 
       <div className={styles.loadingTrigger} ref={ref}></div>
     </div>

@@ -1,15 +1,13 @@
-$grid-gap: 1rem;
-
 .columns {
   display: grid;
   grid-template-columns: repeat(var(--column-count), 300px);
-  column-gap: $grid-gap;
+  column-gap: var(--grid-gap);
 }
 
 .columns,
 .imgContainer {
   width: 100%;
-  margin: $grid-gap 0;
+  margin: var(--grid-gap) 0;
 }
 
 .imgContainer {
