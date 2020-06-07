@@ -45,6 +45,7 @@ const awesomeWords = [
   "terrific",
   "unbelievable",
   "unreal",
+  "well done",
   "wicked",
   "wonderful",
   "wow",
