@@ -32,10 +32,16 @@ export const SearchResults: FC<SearchResultsProps> = ({ gifs }) => {
           <div key={column}>
             {images
               .filter((img, i) => i % numCols === column)
-              .map((img) => (
-                <div className={styles.imgContainer} key={img.url}>
-                  <CopyButton url={img.url} />
-                  <img className={styles.img} src={img.url} />
+              .map((gif) => (
+                <div
+                  className={styles.imgContainer}
+                  key={gif.url}
+                  style={{
+                    width: "300px",
+                    height: gif.height * (300 / gif.width) + "px",
+                  }}>
+                  <CopyButton url={gif.url} />
+                  <img className={styles.img} src={gif.url} />
                 </div>
               ))}
           </div>
