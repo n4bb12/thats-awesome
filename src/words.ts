@@ -1,6 +1,8 @@
 const awesomeWords = [
   "amazing",
   "awesome",
+  "clap",
+  "excellent",
   "fascinating",
   "good",
   "great",
