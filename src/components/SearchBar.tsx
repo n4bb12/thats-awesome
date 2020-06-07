@@ -19,6 +19,15 @@ export const SearchBar: FC<SearchBarProps> = ({ input, onInputChange }) => {
       autoComplete="false"
       autoCorrect="false"
       autoFocus
+      onBlur={(e) => {
+        const scrollTop = document.documentElement.scrollTop
+        e.target.focus()
+        document.documentElement.scrollTop = scrollTop
+      }}
+      onFocus={(e) => {
+        const length = e.target.value.length
+        e.target.setSelectionRange(length, length)
+      }}
     />
   )
 }
