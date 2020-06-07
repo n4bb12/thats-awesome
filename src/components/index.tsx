@@ -1,4 +1,5 @@
 export * from "./Background"
 export * from "./GifVariants"
+export * from "./Search"
 export * from "./SearchBar"
 export * from "./SearchResults"
