@@ -57,11 +57,6 @@ export const Search: NextPage<SearchProps> = ({
   )
 
   useEffect(() => {
-    updateUrl(input)
-    searchDebounced(input, 0)
-  }, [input])
-
-  useEffect(() => {
     if (inView && !busy) {
       search(input, page + 1)
     }
@@ -71,7 +66,14 @@ export const Search: NextPage<SearchProps> = ({
     <div className={styles.container}>
       <h1>{config.title}</h1>
 
-      <SearchBar input={input} onInputChange={setInput} />
+      <SearchBar
+        input={input}
+        onInputChange={() => {
+          setInput(input)
+          updateUrl(input)
+          searchDebounced(input, 0)
+        }}
+      />
       <SearchResults columns={columnManager.columns} />
 
       <div className={styles.loadingTrigger} ref={ref}></div>
