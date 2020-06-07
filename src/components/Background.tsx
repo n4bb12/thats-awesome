@@ -10,8 +10,7 @@ export const Background: FC = ({ children }) => {
       className={styles.img}
       imgixParams={{
         auto: "format,compress",
-      }}
-    >
+      }}>
       {children}
     </ImgixBackground>
   )

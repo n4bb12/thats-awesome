@@ -28,12 +28,12 @@
 }
 
 .copyLabel {
-  color: #02B7FF;
+  color: #02b7ff;
 }
 
 .copyFeedback {
-  border-color: #DC1383;
-  color: #DC1383;
+  border-color: currentColor;
+  color: #dc1383;
 }
 
 .copyButton:hover {
@@ -42,9 +42,9 @@
   }
 }
 
-
 .copyButton__copied {
-  &, &:hover {
+  &,
+  &:hover {
     .copyLabel {
       opacity: 0;
     }

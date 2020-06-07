@@ -13,7 +13,7 @@ export const SearchBar: FC<SearchBarProps> = ({ input, onInputChange }) => {
       className={styles.input}
       type="search"
       value={input}
-      onChange={e => onInputChange(e.target.value)}
+      onChange={(e) => onInputChange(e.target.value)}
       spellCheck={false}
       autoCapitalize="false"
       autoComplete="false"

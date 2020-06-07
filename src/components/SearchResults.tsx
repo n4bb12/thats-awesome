@@ -12,7 +12,7 @@ export type SearchResultsProps = {
 
 export const SearchResults: FC<SearchResultsProps> = ({ gifs }) => {
   const [numCols, setNumCols] = useState(3)
-  const images = gifs?.data?.map(result => result.images.fixed_width) || []
+  const images = gifs?.data?.map((result) => result.images.fixed_width) || []
 
   return (
     <div>
@@ -25,19 +25,15 @@ export const SearchResults: FC<SearchResultsProps> = ({ gifs }) => {
       /> */}
       <div
         className={styles.columns}
-        style={{ ["--column-count"]: numCols } as any}
-      >
-        {columns.slice(0, numCols).map(column => (
+        style={{ ["--column-count"]: numCols } as any}>
+        {columns.slice(0, numCols).map((column) => (
           <div key={column}>
             {images
               .filter((img, i) => i % numCols === column)
-              .map(img => (
+              .map((img) => (
                 <div className={styles.imgContainer} key={img.url}>
                   <CopyButton url={img.url} />
-                  <img
-                    className={styles.img}
-                    src={img.url}
-                  />
+                  <img className={styles.img} src={img.url} />
                 </div>
               ))}
           </div>
