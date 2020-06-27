@@ -1,4 +1,3 @@
-import { IGif } from "@giphy/js-types"
 import debounce from "lodash/debounce"
 import { NextPage } from "next"
 import { useCallback, useEffect, useState } from "react"
@@ -13,20 +12,18 @@ import styles from "./Search.module.scss"
 
 const gf = giphyApiClient()
 
-export type SearchProps = {
-  initialInput: string
-  initialGifs: IGif[]
+function getQuery() {
+  return process.browser && window.location.search.substr("?q=".length)?.trim()
 }
 
-export const Search: NextPage<SearchProps> = ({
-  initialInput,
-  initialGifs,
-}) => {
+export const Search: NextPage = () => {
+  const initialInput = getQuery() || randomWord()
+
   const [input, setInput] = useState(initialInput)
   const [page, setPage] = useState(0)
   const [ref, inView] = useInView()
   const [busy, setBusy] = useState(false)
-  const [columnManager] = useState(new ColumnManager(initialGifs))
+  const [columnManager] = useState(new ColumnManager())
 
   const search = useCallback(
     async (userInput: string, scrolledPage: number) => {
@@ -59,6 +56,10 @@ export const Search: NextPage<SearchProps> = ({
     debounce(search, config.searchDebounceTimeMs),
     [search],
   )
+
+  useEffect(() => {
+    search(input, 0)
+  }, [])
 
   useEffect(() => {
     if (inView && !busy) {

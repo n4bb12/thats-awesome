@@ -7,8 +7,8 @@ export class ColumnManager {
   private cols: SearchResultsProps["columns"]
   private colHeights: number[]
 
-  constructor(initialGifs: IGif[]) {
-    this.setResults(initialGifs)
+  constructor(initialGifs?: IGif[]) {
+    this.setResults(initialGifs || [])
   }
 
   setResults(gifs: IGif[]) {
