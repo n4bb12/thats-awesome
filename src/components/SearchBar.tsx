@@ -11,6 +11,7 @@ export const SearchBar: FC<SearchBarProps> = ({ input, onInputChange }) => {
   return (
     <div className={styles.wrapper}>
       <input
+        aria-label="Search"
         className={styles.input}
         type="search"
         value={input}
@@ -32,9 +33,7 @@ export const SearchBar: FC<SearchBarProps> = ({ input, onInputChange }) => {
       />
 
       {input && (
-        <button
-          className={styles.clear}
-          onClick={(e) => onInputChange("")}></button>
+        <button className={styles.clear} onClick={(e) => onInputChange("")} aria-label="Clear" />
       )}
     </div>
   )
