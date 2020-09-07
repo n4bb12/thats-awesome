@@ -1,5 +1,6 @@
 import { FC } from "react"
 import ImgixBackground from "react-imgix"
+
 import styles from "./Background.module.scss"
 
 export const Background: FC = ({ children }) => {

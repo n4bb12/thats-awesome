@@ -1,0 +1,26 @@
+{
+  "name": "That's awesome!",
+  "short_name": "TA",
+  "description": "The best way to say something is awesome!",
+  "scope": "/",
+  "start_url": "/?source=pwa",
+  "theme_color": "#dc1383",
+  "background_color": "#02b7ff",
+  "display": "standalone",
+  "orientation": "portrait",
+  "icons": [
+    {
+      "src": "/android-chrome-192x192.png",
+      "type": "image/png",
+      "sizes": "192x192",
+      "purpose": "maskable any"
+    },
+    {
+      "src": "/android-chrome-512x512.png",
+      "type": "image/png",
+      "sizes": "512x512",
+      "purpose": "maskable any"
+    }
+  ],
+  "shortcuts": []
+}
