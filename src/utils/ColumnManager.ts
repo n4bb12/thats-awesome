@@ -1,6 +1,7 @@
 import { IGif } from "@giphy/js-types"
 import range from "lodash/range"
-import { SearchResultsProps } from "../components"
+
+import { Gif, SearchResultsProps } from "../components"
 import { config } from "../config"
 
 export class ColumnManager {
@@ -25,10 +26,11 @@ export class ColumnManager {
     const columnIndex = this.shortestColumnIndex
     const { width, height, url } = gif.images.fixed_width
 
-    const ourGif = {
+    const ourGif: Gif = {
       width: config.columnWidth,
       height: height * (config.columnWidth / width),
       url,
+      alt: gif.title,
     }
 
     this.cols[columnIndex].gifs.push(ourGif)

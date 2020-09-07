@@ -4,13 +4,16 @@ import { config } from "../config"
 import { CopyButton } from "./CopyButton"
 import styles from "./SearchResults.module.scss"
 
-export type SearchResultsProps = {
+export interface Gif {
+  width: number
+  height: number
+  url: string
+  alt: string
+}
+
+export interface SearchResultsProps {
   columns: {
-    gifs: {
-      width: number
-      height: number
-      url: string
-    }[]
+    gifs: Gif[]
   }[]
 }
 
@@ -35,7 +38,7 @@ export const SearchResults: FC<SearchResultsProps> = ({ columns }) => {
                 height: gif.height + "px",
               }}>
               <CopyButton url={gif.url} />
-              <img className={styles.img} src={gif.url} />
+              <img className={styles.img} src={gif.url} alt={gif.alt} />
             </div>
           ))}
         </div>
