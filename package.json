@@ -2,6 +2,12 @@
   "name": "thats-awesome",
   "version": "0.1.0",
   "private": true,
+  "keywords": [],
+  "homepage": "https://github.com/n4bb12/thats-awesome/blob/master/README.md",
+  "bugs": "https://github.com/n4bb12/thats-awesome/issues",
+  "repository": "github:n4bb12/thats-awesome",
+  "license": "ISC",
+  "author": "Abraham Schilling",
   "scripts": {
     "build": "next build",
     "dev": "next dev",
@@ -13,8 +19,8 @@
     "@giphy/react-components": "^1.0.7",
     "copy-to-clipboard": "^3.3.1",
     "lodash": "^4.17.15",
-    "modern-normalize": "^0.6.0",
-    "next": "9.4.2",
+    "modern-normalize": "^1.0.0",
+    "next": "9.5.3",
     "react": "16.13.1",
     "react-dom": "16.13.1",
     "react-imgix": "^9.0.2",
@@ -27,6 +33,6 @@
     "@types/react": "^16.9.35",
     "@types/react-imgix": "^9.0.3",
     "prettier": "^2.0.5",
-    "typescript": "^3.9.3"
+    "typescript": "^4.0.2"
   }
 }
