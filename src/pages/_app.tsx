@@ -5,11 +5,16 @@ import Head from "next/head"
 
 import "./_app.scss"
 import { config } from "../config"
+import { useRouter } from "next/dist/client/router"
 
 function MyApp({ Component, pageProps }: AppProps) {
+  const router = useRouter()
+  const pathname = router.pathname === "/" ? "" : router.pathname
   return (
     <>
       <Head>
+        <meta charSet="utf-8" />
+        <base href="/" />
         <title>{config.title}</title>
 
         <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png?v=XByJjWgwde" />
@@ -18,6 +23,7 @@ function MyApp({ Component, pageProps }: AppProps) {
         <link rel="manifest" href="/app.webmanifest?v=XByJjWgwde" />
         <link rel="mask-icon" href="/safari-pinned-tab.svg?v=XByJjWgwde" color="#02b7ff" />
         <link rel="shortcut icon" href="/favicon.ico?v=XByJjWgwde" />
+        <link rel="canonical" href={"https://thats-awesome.vercel.app" + pathname} />
 
         <meta name="theme-color" content="#02b7ff" />
         <meta name="application-name" content="That's awesome!" />
