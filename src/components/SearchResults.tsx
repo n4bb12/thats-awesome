@@ -1,6 +1,7 @@
 import { FC } from "react"
 
-import { config } from "../config"
+import { config } from "src/config"
+
 import { CopyButton } from "./CopyButton"
 import styles from "./SearchResults.module.scss"
 

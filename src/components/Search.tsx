@@ -3,11 +3,12 @@ import { NextPage } from "next"
 import { useCallback, useEffect, useState } from "react"
 import { useInView } from "react-intersection-observer"
 
-import { SearchBar, SearchResults } from "../components"
-import { config } from "../config"
-import { giphyApiClient } from "../giphy"
-import { ColumnManager, updateUrl } from "../utils"
-import { randomWord } from "../words"
+import { SearchBar, SearchResults } from "src/components"
+import { config } from "src/config"
+import { giphyApiClient } from "src/giphy"
+import { ColumnManager, updateUrl } from "src/utils"
+import { randomWord } from "src/words"
+
 import styles from "./Search.module.scss"
 
 const gf = giphyApiClient()

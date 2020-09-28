@@ -1,6 +1,6 @@
 import { NextPage } from "next"
 
-import { Background, Search } from "../components"
+import { Background, Search } from "src/components"
 
 const Home: NextPage = () => {
   if (process.browser && "scrollRestoration" in window.history) {

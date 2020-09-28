@@ -1,8 +1,8 @@
 import { IGif } from "@giphy/js-types"
 import range from "lodash/range"
 
-import { Gif, SearchResultsProps } from "../components"
-import { config } from "../config"
+import { Gif, SearchResultsProps } from "src/components"
+import { config } from "src/config"
 
 export class ColumnManager {
   private cols: SearchResultsProps["columns"]

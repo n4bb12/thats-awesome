@@ -13,9 +13,9 @@
   "useTabs": false,
   "overrides": [
     {
-      "files": "_app.tsx",
+      "files": "MetaTags.tsx",
       "options": {
-        "printWidth": 180
+        "printWidth": 240
       }
     }
   ]
