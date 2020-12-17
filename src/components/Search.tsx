@@ -66,7 +66,7 @@ export const Search: NextPage = () => {
     if (inView && !busy) {
       search(input, page + 1)
     }
-  }, [inView])
+  }, [inView, busy, page])
 
   return (
     <div className={styles.container}>
