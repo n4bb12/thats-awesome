@@ -50,6 +50,7 @@ const awesomeWords = [
   "well done",
   "wicked",
   "wonderful",
+  "woop",
   "wow",
   "yay",
   "yep",
