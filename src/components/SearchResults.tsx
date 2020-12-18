@@ -1,7 +1,5 @@
 import { FC } from "react"
 
-import { config } from "src/config"
-
 import { CopyButton } from "./CopyButton"
 import styles from "./SearchResults.module.scss"
 
@@ -20,14 +18,7 @@ export interface SearchResultsProps {
 
 export const SearchResults: FC<SearchResultsProps> = ({ columns }) => {
   return (
-    <div
-      className={styles.columns}
-      style={
-        {
-          ["--column-count"]: config.colums,
-          ["--grid-gap"]: config.gridGap + "px",
-        } as any
-      }>
+    <div className={styles.columns}>
       {columns.map((column, c) => (
         <div key={c}>
           {column.gifs.map((gif) => (

@@ -7,12 +7,12 @@
 .columns,
 .imgContainer {
   width: 100%;
-  margin: var(--grid-gap) 0;
 }
 
 .imgContainer {
   position: relative;
   background: rgba(white, 0.9);
+  margin-bottom: var(--grid-gap);
 }
 
 .img {

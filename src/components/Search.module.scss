@@ -3,8 +3,19 @@
   width: 60rem;
   max-width: 100%;
   margin: 0 auto;
-  padding: 5rem 1rem;
+  display: grid;
+  gap: var(--section-gap);
+  padding: calc(2 * var(--section-gap)) var(--grid-gap);
+
+  // We need this to avoid loading 2 pages initially due to an early firing intersection observer.
   min-height: 150vh;
+
+  h1 {
+    margin: 0;
+    color: gold;
+    text-shadow: 0 0 1rem red;
+    font-size: 3rem;
+  }
 }
 
 .loadingTrigger {
@@ -13,7 +24,7 @@
   right: 0;
   bottom: 50vh;
   height: 1rem;
-  background: red;
+  background: #dc1383;
   pointer-events: none;
   transform: translateY(101%);
   opacity: 0;
