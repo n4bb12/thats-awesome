@@ -80,6 +80,7 @@ export const Search: NextPage = () => {
           searchDebounced(newInput, 0)
         }}
       />
+
       <SearchResults columns={columnManager.columns} />
 
       <div className={styles.loadingTrigger} ref={ref}></div>

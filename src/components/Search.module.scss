@@ -4,10 +4,12 @@
   max-width: 100%;
   margin: 0 auto;
   display: grid;
+  grid-template-rows: auto auto 1fr auto;
   gap: var(--section-gap);
   padding: calc(2 * var(--section-gap)) var(--grid-gap);
 
-  // We need this to avoid loading 2 pages initially due to an early firing intersection observer.
+  // We need this to avoid loading 2 pages initially due to
+  // an early firing, initially visible intersection observer.
   min-height: 150vh;
 
   h1 {
