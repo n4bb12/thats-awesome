@@ -1,6 +1,8 @@
 import copyToClipboard from "copy-to-clipboard"
 import { FC, useCallback, useEffect, useState } from "react"
 
+import { config } from "src/config"
+
 import styles from "./CopyButton.module.scss"
 
 const copyEvent = "app-copy"
@@ -43,7 +45,7 @@ export const CopyButton: FC<CopyButtonProps> = ({ url }) => {
     .join(" ")
 
   const onClick = useCallback(() => {
-    copyToClipboard(`![](${url})`)
+    copyToClipboard(`<img src="${url}" width="${config.columnWidth}"/>`)
     emitCopy(url)
   }, [url])
 
