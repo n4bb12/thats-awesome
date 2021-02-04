@@ -33,7 +33,11 @@ export const SearchBar: FC<SearchBarProps> = ({ input, onInputChange }) => {
       />
 
       {input && (
-        <button className={styles.clear} onClick={(e) => onInputChange("")} aria-label="Clear" />
+        <button
+          className={styles.clear}
+          onClick={(e) => onInputChange("")}
+          aria-label="Clear"
+        />
       )}
     </div>
   )
