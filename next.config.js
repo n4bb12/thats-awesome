@@ -1,26 +1,15 @@
-const composePlugins = require("next-compose-plugins")
-const pwa = require("next-pwa")
-
-const pwaConfig = {
-  pwa: {
-    disable:
-      process.env.NODE_ENV === "development" && !process.argv.includes("--pwa"),
-    dest: "public",
-  },
-}
-
-// All config properties, including experimental flags:
-// https://github.com/vercel/next.js/blob/master/packages/next/next-server/server/config.ts
+/**
+ * https://nextjs.org/docs/api-reference/next.config.js/introduction
+ * @type {import('next').NextConfig}
+ */
 const nextConfig = {
   i18n: {
-    locales: ["en-US"],
-    defaultLocale: "en-US",
+    locales: ["de"],
+    defaultLocale: "de",
     localeDetection: false,
   },
-  experimental: {
-    productionBrowserSourceMaps: true,
-  },
+  productionBrowserSourceMaps: true,
   reactStrictMode: true,
 }
 
-module.exports = composePlugins([[pwa, pwaConfig]], nextConfig)
+module.exports = nextConfig

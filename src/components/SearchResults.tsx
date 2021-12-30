@@ -28,7 +28,8 @@ export const SearchResults: FC<SearchResultsProps> = ({ columns }) => {
               style={{
                 width: gif.width + "px",
                 height: gif.height + "px",
-              }}>
+              }}
+            >
               <CopyButton url={gif.url} />
               <img className={styles.img} src={gif.url} alt={gif.alt} />
             </div>

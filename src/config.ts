@@ -6,5 +6,5 @@ export const config = {
   sectionGap: 48,
   chunkSize: 25,
   searchDebounceTimeMs: 100,
-  giphyApiKey: process.env.NEXT_PUBLIC_GIPHY_API_KEY,
+  giphyApiKey: "MWX7MTpmBt7la79zzebfux1DBvz2SbMO",
 } as const

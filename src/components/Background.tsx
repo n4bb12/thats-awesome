@@ -8,7 +8,8 @@ export const Background: FC = ({ children }) => {
     <ImgixBackground
       src="https://images.unsplash.com/photo-1481137344492-d5a150a97f8b"
       className={styles.img}
-      imgixParams={{ auto: "format,compress", q: 50 }}>
+      imgixParams={{ auto: "format,compress", q: 50 }}
+    >
       {children}
     </ImgixBackground>
   )

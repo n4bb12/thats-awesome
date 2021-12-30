@@ -16,7 +16,8 @@ function MyApp({ Component, pageProps }: AppProps) {
           ["--grid-gap"]: config.gridGap + "px",
           ["--section-gap"]: config.sectionGap + "px",
         } as any
-      }>
+      }
+    >
       <MetaTags />
       <Component {...pageProps} />
     </div>
