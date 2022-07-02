@@ -22,12 +22,7 @@ export type CopyButtonProps = {
 export const CopyButton: FC<CopyButtonProps> = ({ url }) => {
   const [copy, copied] = useCopiedUrl(url)
 
-  const buttonClassName = [
-    styles.copyButton,
-    copied ? styles.copyButton__copied : null,
-  ]
-    .filter(Boolean)
-    .join(" ")
+  const buttonClassName = [styles.copyButton, copied ? styles.copyButton__copied : null].filter(Boolean).join(" ")
 
   return (
     <button type="button" className={buttonClassName} onClick={copy}>

@@ -8,10 +8,7 @@ export type GifVariantsProps = {
 export const GifVariants: FC<GifVariantsProps> = ({ gifs }) => {
   const images = Object.entries(gifs?.data[0]?.images || {}).filter(
     ([key]) =>
-      !key.endsWith("_still") &&
-      !key.endsWith("_downsampled") &&
-      !key.endsWith("_mp4") &&
-      !key.startsWith("preview_"),
+      !key.endsWith("_still") && !key.endsWith("_downsampled") && !key.endsWith("_mp4") && !key.startsWith("preview_"),
   )
 
   return (

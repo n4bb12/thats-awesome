@@ -1,6 +1,18 @@
+# directories
 .next/
 .vscode/
-*.log
-*.tsbuildinfo
 node_modules/
 out/
+
+# files
+.DS_Store
+*.log
+*.tsbuildinfo
+
+# yarn
+.yarn/*
+!.yarn/patches
+!.yarn/plugins
+!.yarn/releases
+!.yarn/sdks
+!.yarn/versions

@@ -44,10 +44,6 @@ export const MetaTags: FC = () => {
       <meta name="apple-mobile-web-app-capable" content="yes" />
       <meta name="apple-mobile-web-app-status-bar-style" content="default" />
       <meta name="apple-mobile-web-app-title" content="That's awesome!" />
-
-      <link rel="preconnect" href="https://images.unsplash.com" />
-      <link rel="preload" href="https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@400;700&display=swap" as="style" />
-      <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@400;700&display=swap" />
     </Head>
   )
 }

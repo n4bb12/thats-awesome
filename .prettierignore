@@ -1,3 +1,5 @@
 .next/
-public/
-out/
+.yarn/
+build/
+dist/
+node_modules/
