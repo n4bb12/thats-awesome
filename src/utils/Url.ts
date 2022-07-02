@@ -1,3 +1,5 @@
-export function updateUrl(query: string) {
-  window.history.replaceState(null, null, window.location.origin + "?q=" + query)
+import Router from "next/router"
+
+export function updateUrl(q: string) {
+  Router.replace({ query: { q } })
 }
