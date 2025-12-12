@@ -20,29 +20,28 @@
   "scripts": {
     "build": "next build",
     "dev": "next dev",
-    "fix": "yarn format && yarn typecheck",
+    "fix": "bun format && bun typecheck",
     "format": "prettier --write \"**/*.{js,jsx,ts,tsx,json,yml,yaml,md,mdx}\"",
     "start": "next start",
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
-    "@giphy/js-fetch-api": "^4.3.1",
+    "@giphy/js-fetch-api": "^4.9.3",
     "lodash": "^4.17.21",
     "modern-normalize": "^1.1.0",
-    "next": "12.2.0",
-    "react": "18.2.0",
-    "react-dom": "18.2.0",
-    "react-imgix": "^9.5.1",
-    "react-intersection-observer": "^9.3.5",
-    "sass": "^1.53.0"
+    "next": "12.3.7",
+    "react": "18.3.1",
+    "react-dom": "18.3.1",
+    "react-imgix": "^9.10.0",
+    "react-intersection-observer": "^9.16.0",
+    "sass": "^1.96.0"
   },
   "devDependencies": {
-    "@types/lodash": "^4.14.182",
-    "@types/node": "^18.0.0",
-    "@types/react": "^18.0.14",
-    "@types/react-imgix": "^9.4.0",
-    "prettier": "^2.7.1",
-    "typescript": "^4.7.4"
-  },
-  "packageManager": "yarn@3.2.1"
+    "@types/lodash": "^4.17.21",
+    "@types/node": "^18.19.130",
+    "@types/react": "^18.3.27",
+    "@types/react-imgix": "^9.5.4",
+    "prettier": "^2.8.8",
+    "typescript": "^4.9.5"
+  }
 }
